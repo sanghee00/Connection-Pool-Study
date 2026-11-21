@@ -1,3 +1,6 @@
 spring:
   application:
     name: spring-connection-pool
+  datasource:
+    hikari:
+      maximum-pool-size: 2

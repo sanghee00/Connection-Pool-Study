@@ -1,19 +1,24 @@
 package com.connection.pool.springconnectionpool.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ConnectionPoolService {
 
-    @Transactional
+    private final ConnectionTxService connectionTxService;
+
+    public ConnectionPoolService(ConnectionTxService connectionTxService) {
+        this.connectionTxService = connectionTxService;
+    }
+
     public void sleep() {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            System.out.println("스레드 에러");
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(e);
         }
+        connectionTxService.save();
     }
 
 }

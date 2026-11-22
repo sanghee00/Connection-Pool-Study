@@ -4,6 +4,12 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 2
+      connection-timeout: 30000
+
+server:
+  tomcat:
+    threads:
+      max: 10
 
 management:
   endpoints:
